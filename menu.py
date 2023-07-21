@@ -20,7 +20,7 @@ def menu(screen, jController, sounds, nextSong, changeSong):
 	seed = [" "," "," "," "," "," "," "," "]
 	controldisplay = ["A","D","W","S","Left Arrow","Right Arrow","Up Arrow","Down Arrow","Q","E"]
 	defaultdisplay = controldisplay[:]
-	controls = [97,100,119,115,276,275,273,274,113,101]
+	controls = [97,100,119,115,K_LEFT,K_RIGHT,K_UP,K_DOWN,113,101]
 	defaultcontrols = controls[:]
 	running = True
 	arrowpoint = 0
@@ -99,6 +99,8 @@ def menu(screen, jController, sounds, nextSong, changeSong):
 			if spotlight > 1:
 				spotlight = 0
 		for e in event.get():
+
+
 			if e.type == QUIT:
 				running = False
 
@@ -107,9 +109,9 @@ def menu(screen, jController, sounds, nextSong, changeSong):
 			if e.type == KEYDOWN and menu == "main" and e.key == 27:
 				quit()
 
-			if e.type == KEYDOWN and menu == "selection" and e.key == 273:
+			if e.type == KEYDOWN and menu == "selection" and e.key == K_UP:
 				arrowpoint -= 1
-			elif e.type == KEYDOWN and menu == "selection" and e.key == 274:
+			elif e.type == KEYDOWN and menu == "selection" and e.key == K_DOWN:
 				arrowpoint += 1
 
 			if arrowpoint > 2:
@@ -117,9 +119,9 @@ def menu(screen, jController, sounds, nextSong, changeSong):
 			elif arrowpoint < 0:
 				arrowpoint = 2
 
-			if e.type == KEYDOWN and menu == "file" and e.key == 276:
+			if e.type == KEYDOWN and menu == "file" and e.key == K_LEFT :
 				filepoint -= 1
-			elif e.type == KEYDOWN and menu == "file" and e.key == 275:
+			elif e.type == KEYDOWN and menu == "file" and e.key == K_RIGHT:
 				filepoint += 1
 			if e.type == KEYDOWN and e.key == 32 and menu == "options":
 				if edit == False:
@@ -144,16 +146,16 @@ def menu(screen, jController, sounds, nextSong, changeSong):
 
 			#Allows for different keys to be linked to the various controls
 			if e.type == KEYDOWN and edit == True and menu == "options" and e.key != 32 and optionpoint != 10:
-				if e.key == 273:
+				if e.key == K_UP:
 					controldisplay[optionpoint] = "Up Arrow"
 					controls[optionpoint] = e.key
-				elif e.key == 274:
+				elif e.key == K_DOWN:
 					controldisplay[optionpoint] = "Down Arrow"
 					controls[optionpoint] = e.key
-				elif e.key == 275:
+				elif e.key == K_RIGHT:
 					controldisplay[optionpoint] = "Right Arrow"
 					controls[optionpoint] = e.key
-				elif e.key == 276:
+				elif e.key == K_LEFT:
 					controldisplay[optionpoint] = "Left Arrow"
 					controls[optionpoint] = e.key
 				elif e.key == 9:
@@ -173,15 +175,15 @@ def menu(screen, jController, sounds, nextSong, changeSong):
 					controls[optionpoint] = e.key
 				edit = False
 			elif e.type == KEYDOWN and edit == False and menu == "options":
-				if e.key == 273:
+				if e.key == K_UP:
 					optionpoint -= 1
-				elif e.key == 274:
+				elif e.key == K_DOWN:
 					optionpoint += 1
 				if optionpoint > 10:
 					optionpoint = 0
 				elif optionpoint < 0:
 					optionpoint = 10
-			if e.type == KEYDOWN and menu == "character" and e.key == 276:
+			if e.type == KEYDOWN and menu == "character" and e.key == K_LEFT:
 				sounds["selectLeft"].stop()
 				sounds["selectLeft"].play()
 				if char == 1:
@@ -211,7 +213,7 @@ def menu(screen, jController, sounds, nextSong, changeSong):
 						screen.blit(menuoverlay2,(0,0))
 						display.flip()
 				char -= 1
-			elif e.type == KEYDOWN and menu == "character" and e.key == 275:
+			elif e.type == KEYDOWN and menu == "character" and e.key == K_RIGHT:
 				sounds["selectRight"].stop()
 				sounds["selectRight"].play()
 				if char == 1:
@@ -248,9 +250,9 @@ def menu(screen, jController, sounds, nextSong, changeSong):
 				createSave(filepoint, char, seed)
 				return char, controls, seed
 
-			if e.type == KEYDOWN and menu == "file" and e.key == 273:
+			if e.type == KEYDOWN and menu == "file" and e.key == K_UP:
 				space -= 1
-			elif e.type == KEYDOWN and menu == "file" and e.key == 274:
+			elif e.type == KEYDOWN and menu == "file" and e.key == K_DOWN:
 				space += 1
 
 			if e.type == KEYDOWN and menu == "file" and e.key == 32 and space == 0:
