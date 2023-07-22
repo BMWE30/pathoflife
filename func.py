@@ -99,6 +99,33 @@ def loadFloor(name, index, size, sounds, textures):
 
 
 
+    # add item room
+	itemRoom = (1,0)
+	floor[itemRoom] = Room(index, 1, itemRoom, d[1], textures, sounds)
+	floor[itemRoom].other.append(PHD((6,3), sounds, textures["phd"]))
+	floor[itemRoom].other.append(Pill((6,3), textures["pills"]))
+
+
+    # add boss room
+	bossRoom = (-1,0)
+	floor[bossRoom] = Room(index, 2, bossRoom, d[0], textures, sounds)
+	floor[bossRoom].enemies.append([Gurdy, Duke][randint(0,1)](textures, sounds))
+
+
+
+	# add shop
+	shopRoom = (0, -1)
+	floor[shopRoom] = Room(index, 5, shopRoom, d[2], textures, sounds)
+	things = [
+		Heart(1, (4,3), [sounds["heartIntake"], sounds["holy"]], textures["pickupHearts"]),
+		Pill((6, 3), textures["pills"]),
+		PHD((8,3), sounds, textures["phd"])
+	]
+	for i in range(len(things)):
+		things[i].price = i*2+3
+		floor[shopRoom].other.append(things[i])
+
+
 	# for i in range(size-1):
 		
 
@@ -119,44 +146,46 @@ def loadFloor(name, index, size, sounds, textures):
 	# 	floor[chosen] = Room(index, 0, chosen, d[unusedRoom], textures, sounds)
 
 	# Spawn shop
-	someRooms = findRooms(floor, possibleCoords, rooms)
-	shuffle(someRooms)
-	for room in someRooms:
-		if room[1] == 1:
-			shop = tuple(room[0])
-			break
-	floor[shop] = Room(index, 5, shop, d[2], textures, sounds)
-	things = [
-		Heart(1, (4,3), [sounds["heartIntake"], sounds["holy"]], textures["pickupHearts"]),
-		Pill((6, 3), textures["pills"]),
-		PHD((8,3), sounds, textures["phd"])
-	]
-	for i in range(len(things)):
-		things[i].price = i*2+3
-		floor[shop].other.append(things[i])
+	# someRooms = findRooms(floor, possibleCoords, rooms)
+	# shuffle(someRooms)
+	# for room in someRooms:
+	# 	if room[1] == 1:
+	# 		shop = tuple(room[0])
+	# 		break
+	# print("!!shop: ")
+	# print(shop)
+	# floor[shop] = Room(index, 5, shop, d[2], textures, sounds)
+	# things = [
+	# 	Heart(1, (4,3), [sounds["heartIntake"], sounds["holy"]], textures["pickupHearts"]),
+	# 	Pill((6, 3), textures["pills"]),
+	# 	PHD((8,3), sounds, textures["phd"])
+	# ]
+	# for i in range(len(things)):
+	# 	things[i].price = i*2+3
+	# 	floor[shop].other.append(things[i])
 
 	# Spawn item room
-	someRooms = findRooms(floor, possibleCoords, rooms)
-	shuffle(someRooms)
-	for room in someRooms:
-		if room[1] == 1:
-			itemRoom = tuple(room[0])
-			break
-	floor[itemRoom] = Room(index, 1, itemRoom, d[1], textures, sounds)
-	if randint(0,10) == 0:
-		floor[itemRoom].other.append(PHD((6,3), sounds, textures["phd"]))
-	else:
-		floor[itemRoom].other.append(Pill((6,3), textures["pills"]))
+	# someRooms = findRooms(floor, possibleCoords, rooms)
+	# shuffle(someRooms)
+	# for room in someRooms:
+	# 	if room[1] == 1:
+	# 		itemRoom = tuple(room[0])
+	# 		break
+	# floor[itemRoom] = Room(index, 1, itemRoom, d[1], textures, sounds)
+	# if randint(0,10) == 0:
+	# 	floor[itemRoom].other.append(PHD((6,3), sounds, textures["phd"]))
+	# else:
+	# 	floor[itemRoom].other.append(Pill((6,3), textures["pills"]))
 
 	# Spawn boss room
-	someRooms = findRooms(floor, possibleCoords, rooms)
-	shuffle(someRooms)
-	for room in someRooms:
-		if room[1] == 1:
-			bossRoom = tuple(room[0])
-			break
-	floor[bossRoom] = Room(index, 2, bossRoom, d[0], textures, sounds)
-	floor[bossRoom].enemies.append([Gurdy, Duke][randint(0,1)](textures, sounds))
+	# someRooms = findRooms(floor, possibleCoords, rooms)
+	# shuffle(someRooms)
+	# for room in someRooms:
+	# 	if room[1] == 1:
+	# 		bossRoom = tuple(room[0])
+	# 		break
+	# floor[bossRoom] = Room(index, 2, bossRoom, d[0], textures, sounds)
+	# floor[bossRoom].enemies.append([Gurdy, Duke][randint(0,1)](textures, sounds))
 
 	return floor
 
