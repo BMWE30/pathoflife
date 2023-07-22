@@ -78,28 +78,45 @@ def loadFloor(name, index, size, sounds, textures):
 	d = xml.parse(os.path.join('res', 'floors', name)).getroot()
 
 	floor = {}
+
+	# starting room
+	# floor 0, variant 0, xy (0,0), 
 	floor[(0,0)] = Room(index, 0, (0,0), d[0], textures, sounds)
 
+	print("length of d:")
+	print(len(d))
 	# Create the floor
 	moves = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 	unusedRooms = [i for i in range(2, len(d))]
 	possibleCoords = moves[:]
-	rooms = [(0,0)]
-	for i in range(size-1):
-		chosen = choice(possibleCoords)
-		x, y = chosen
-		possibleCoords.remove(chosen)
-		for m in moves:
-			mx, my = m
-			if (x+mx, y+my) not in rooms:
-				possibleCoords.append((x+mx, y+my))
+	rooms = [(0,0), (0,1), (0,2), (0,3), (0,4), (0,5), (0,6)]
+	floor[(0,1)] = Room(index, 0, (0,1), d[2], textures, sounds)
+	floor[(0,2)] = Room(index, 0, (0,2), d[3], textures, sounds)
+	floor[(0,3)] = Room(index, 0, (0,3), d[4], textures, sounds)
+	floor[(0,4)] = Room(index, 0, (0,4), d[5], textures, sounds)
+	floor[(0,5)] = Room(index, 0, (0,5), d[6], textures, sounds)
+	floor[(0,6)] = Room(index, 0, (0,6), d[7], textures, sounds)
 
-		unusedRoom = choice(unusedRooms)
-		unusedRooms.remove(unusedRoom)
-		rooms.append(chosen)
 
-		# Create a room at the selected spot
-		floor[chosen] = Room(index, 0, chosen, d[unusedRoom], textures, sounds)
+
+	# for i in range(size-1):
+		
+
+
+	# 	chosen = choice(possibleCoords)
+	# 	x, y = chosen
+	# 	possibleCoords.remove(chosen)
+	# 	for m in moves:
+	# 		mx, my = m
+	# 		if (x+mx, y+my) not in rooms:
+	# 			possibleCoords.append((x+mx, y+my))
+
+	# 	unusedRoom = choice(unusedRooms)
+	# 	unusedRooms.remove(unusedRoom)
+	# 	rooms.append(chosen)
+
+	# 	# Create a room at the selected spot
+	# 	floor[chosen] = Room(index, 0, chosen, d[unusedRoom], textures, sounds)
 
 	# Spawn shop
 	someRooms = findRooms(floor, possibleCoords, rooms)
