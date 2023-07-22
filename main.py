@@ -100,7 +100,7 @@ textures = {
 	"hearts": loadTexture("hearts.png"),
 	"mental": loadTexture("mental.png"),
 	"pickups": loadTexture("pickups.png"),
-	"character": [darken(loadTexture(["lazarus.png", "isaac.png", "eve.png"][i]), .1) for i in range(3)],
+	"character": [darken(loadTexture(["isaac.png", "isaac_high_school.png", "isaac_adult.png"][i]), .1) for i in range(3)],
 	"floors": [loadTexture("basement.png"),
 			loadTexture("caves.png"),
 			loadTexture("catacombs.png"),
@@ -215,7 +215,7 @@ while running:
     # characterType, controls, floorSeed = menu(
     #     screen, jController, sounds, nextSong, changeSong)
 
-    characterType, controls, floorSeed = 2, [
+    characterType, controls, floorSeed = 0, [
         97, 100, 119, 115, 1073741904, 1073741903, 1073741906, 1073741905, 113, 101], 'DEEFAFIC'
 
     # Floor setup

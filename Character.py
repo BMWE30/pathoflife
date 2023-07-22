@@ -23,6 +23,7 @@ from Pill import *
 from Trapdoor import *
 from Banner import *
 
+
 class Character:
 	"""The main class for Isaac"""
 
@@ -31,6 +32,8 @@ class Character:
 	def __init__(self, variant, xy, keys, textures, sounds, fonts):
 		self.variant = variant
 		self.x, self.y = xy
+		self.age = 0
+		self.allTextures = textures
 		self.textures = textures["character"][variant]
 
 		# Record import sounds and textures
@@ -204,9 +207,18 @@ class Character:
 
 	def usePill(self):
 		if self.pill != None: # Ensure the character has a pill
-
+			
 			self.pill.use(self) # Pass in the character to check for PHD
-			st = self.pill.stats # The pills statss
+			st = self.pill.stats # The pills stats
+			self.age = self.age + 1
+			self.textures = self.allTextures["character"][self.age]
+			self.heads = [self.textures.subsurface(Rect((i*64)*2, 0, 64, 64)) for i in range(3)]
+			self.heads.append(transform.flip(self.heads[1], True, False))
+			self.tearHeads = [self.textures.subsurface(Rect(64+(i*64)*2, 0, 64, 64)) for i in range(3)]
+			self.tearHeads.append(transform.flip(self.tearHeads[1], True, False))
+			self.specialFrames = [self.textures.subsurface(i*128, 272+128, 128, 128) for i in range(1, 3)]
+			self.specialFrame = 0
+
 			types = ["Speed", "Tears", "Damage", "Range", "Shot Speed", "Luck"] # The types of pills
 			if sum(st) == -1:
 				# Its a negative pill

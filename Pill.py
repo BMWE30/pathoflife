@@ -26,6 +26,6 @@ class Pill(Item):
 		
 		hasPHD = sum([1 if type(item) == PHD else 0 for item in character.items]) > 0
 		self.stats = [0]*6
-		self.stats[randint(0,5)] = 1 if randint(0,1) or hasPHD else -1
+		self.stats[randint(0,5)] = 1 if randint(0,1) or hasPHD else 1
 
 		return not self.pickedUp
