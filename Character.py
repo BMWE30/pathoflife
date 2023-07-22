@@ -10,6 +10,7 @@ from random import randint
 from math import *
 from const import GRATIO
 from UIHeart import *
+from UIMentalHealth import *
 from Tear import *
 from Fire import *
 from Coin import *
@@ -47,6 +48,7 @@ class Character:
 		# Tears + hearts
 		self.tears = []
 		self.hearts = [UIHeart(0, 2, textures["hearts"]) for i in range(3)]
+		self.mentalhearts = [UIMentalHealth(0, 2, textures["mental"]) for i in range(3)]
 
 		# Head, shoulders knees and toes, knees and toes!
 		self.heads = [self.textures.subsurface(Rect((i*64)*2, 0, 64, 64)) for i in range(3)]
@@ -528,6 +530,9 @@ class Character:
 
 		for i in range(len(self.hearts)):
 			self.hearts[i].render(surface, i)
+
+		for i in range(len(self.mentalhearts)):
+			self.mentalhearts[i].render(surface, i)
 
 		for p in self.pickups:
 			p.render(surface)
