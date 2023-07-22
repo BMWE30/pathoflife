@@ -77,6 +77,7 @@ def findRooms(floor, possibleCoords, rooms):
 def loadFloor(name, index, size, sounds, textures):
 	d = xml.parse(os.path.join('res', 'floors', name)).getroot()
 
+	print("entering floor: " + name)
 	floor = {}
 
 	# starting room
@@ -89,13 +90,10 @@ def loadFloor(name, index, size, sounds, textures):
 	moves = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 	unusedRooms = [i for i in range(2, len(d))]
 	possibleCoords = moves[:]
-	rooms = [(0,0), (0,1), (0,2), (0,3), (0,4), (0,5), (0,6)]
+	rooms = [(0,0), (0,1), (0,2), (0,3)]
 	floor[(0,1)] = Room(index, 0, (0,1), d[2], textures, sounds)
-	floor[(0,2)] = Room(index, 0, (0,2), d[3], textures, sounds)
-	floor[(0,3)] = Room(index, 0, (0,3), d[4], textures, sounds)
-	floor[(0,4)] = Room(index, 0, (0,4), d[5], textures, sounds)
-	floor[(0,5)] = Room(index, 0, (0,5), d[6], textures, sounds)
-	floor[(0,6)] = Room(index, 0, (0,6), d[7], textures, sounds)
+	floor[(0,2)] = Room(index, 0, (0,2), d[2], textures, sounds)
+	floor[(0,3)] = Room(index, 0, (0,3), d[2], textures, sounds)
 
 
 

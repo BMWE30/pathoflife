@@ -116,7 +116,7 @@ textures = {
 			loadTexture("boss_door.png"),
 			loadTexture("devil_door.png"),
 			loadTexture("angel_door.png")],
-	"controls": loadTexture("controls.png"),
+	"controls": loadTexture("tutorial.png"),
 	"rocks": darken(loadTexture("rocks.png"), .1),
 	"poops": loadTexture("poops.png"),
 	"tears": [loadTexture("tears.png"), loadTexture("tear_pop.png")],

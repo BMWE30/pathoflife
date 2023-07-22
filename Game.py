@@ -39,7 +39,7 @@ class Game:
 
 	def setup(self):
 		# Load floor with custom data
-		floor = loadFloor(["basement.xml", "basement.xml", "basement.xml", "basement.xml", "basement.xml", "basement.xml", "basement.xml"][self.floorIndex], self.floorIndex, randint(8, 12), self.sounds, self.textures)
+		floor = loadFloor(["childhood.xml", "basement.xml", "basement.xml", "basement.xml", "basement.xml", "basement.xml", "basement.xml"][self.floorIndex], self.floorIndex, randint(8, 12), self.sounds, self.textures)
 		adjecent = [-1,0], [0, 1], [1, 0], [0, -1]
 		doorPoss = [[13, 3], [6,7], [-1,3], [6,-1]]
 
