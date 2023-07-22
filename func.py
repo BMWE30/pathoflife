@@ -100,9 +100,9 @@ def loadFloor(name, index, size, sounds, textures):
 
 
     # add item room
-	itemRoom = (1,0)
+	itemRoom = (0,0)
 	floor[itemRoom] = Room(index, 1, itemRoom, d[1], textures, sounds)
-	floor[itemRoom].other.append(PHD((6,3), sounds, textures["phd"]))
+	#floor[itemRoom].other.append(PHD((6,3), sounds, textures["phd"]))
 	floor[itemRoom].other.append(Pill((6,3), textures["pills"]))
 
 
