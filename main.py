@@ -95,6 +95,7 @@ display.set_icon(image.load(os.path.join('res','textures', 'icon.png')))
 # Load all needed textures
 textures = {
 	"hearts": loadTexture("hearts.png"),
+	"mental": loadTexture("mental.png"),
 	"pickups": loadTexture("pickups.png"),
 	"character": [darken(loadTexture(["lazarus.png", "isaac.png", "eve.png"][i]), .1) for i in range(3)],
 	"floors": [loadTexture("basement.png"),
