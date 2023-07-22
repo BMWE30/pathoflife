@@ -114,6 +114,9 @@ class Door:
 		# Convert grid x and y to pixel x and y
 		xy = (((142 + (self.x*GRATIO)-(width//2)-GRATIO//2) + self.xOff) + ox, ((89 + (self.y*GRATIO)-(height//2)+GRATIO//2)+self.yOff) + oy)
 
+		f = font.Font('freesansbold.ttf', 32)
+		text_surface = f.render('Some Text!!!', False, (0, 0, 0))
+		surface.blit(text_surface, xy)
 		surface.blit(self.doorBack, xy)
 
 		if not self.isOpen:
