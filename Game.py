@@ -67,7 +67,7 @@ class Game:
 
 		# Create a banner for the new floor
 		self.floor = floor
-		self.banners.append(Banner(["Basement", "Caves", "Catacombs","Necropolis","Depths","Womb","Uterus"][self.floorIndex], self.textures))
+		self.banners.append(Banner(["Birth", "Caves", "Catacombs","Necropolis","Depths","Womb","Uterus"][self.floorIndex], self.textures))
 
 	def updateMinimap(self, currentRoom):
 		# Draw the minimap
