@@ -204,6 +204,48 @@ def loadFloor(name, index, size, sounds, textures):
                                textures, sounds, False, [])
         floor[bossRoom].enemies.append(
             [Gurdy, Duke][randint(0, 1)](textures, sounds))
+        
+    # floor 2 adult
+    elif index == 2:
+        # starting room
+        # floor 0, variant 0, xy (0,0),
+        floor[(0, 0)] = Room(index, 0, (0, 0),
+                             d[0], textures, sounds, False, [])
+
+        # Create the floor
+        moves = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        unusedRooms = [i for i in range(2, len(d))]
+        possibleCoords = moves[:]
+        rooms = [(0, 0), (0, 1), (0, 2), (0, 3)]
+        floor[(1, 0)] = Room(index, 0, (1, 0),
+                             d[1], textures, sounds, False, [])
+        floor[(2, 0)] = Room(index, 0, (2, 0), d[1],
+                             textures, sounds, True, ["Toy", "Food", ""])
+        floor[(2, -1)] = Room(index, 0, (2, -1),
+                              d[1], textures, sounds, False, [])
+
+        floor[(2, -2)] = Room(index, 0, (2, -2),
+                              d[1], textures, sounds, False, [])
+
+        # add boss room
+        bossRoom = (2, -3)
+        floor[bossRoom] = Room(index, 2, bossRoom, d[0],
+                               textures, sounds, False, [])
+        floor[bossRoom].enemies.append(
+            [Gurdy, Duke][randint(0, 1)](textures, sounds))
+
+        floor[(2, 1)] = Room(index, 0, (2, 1),
+                             d[1], textures, sounds, False, [])
+
+        floor[(2, 2)] = Room(index, 0, (2, 2),
+                             d[1], textures, sounds, False, [])
+
+        # add boss room
+        bossRoom = (2, 3)
+        floor[bossRoom] = Room(index, 2, bossRoom, d[0],
+                               textures, sounds, False, [])
+        floor[bossRoom].enemies.append(
+            [Gurdy, Duke][randint(0, 1)](textures, sounds))
 
     # add item room
     # itemRoom = (0,0)

@@ -24,6 +24,7 @@ class Game:
     floor = {}
     floorIndex = 0
     currentRoom = (0, 0)
+    previousRoom = []
     animatingRooms = []
     won = False
 

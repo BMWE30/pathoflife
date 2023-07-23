@@ -34,7 +34,7 @@ class Character:
     hurtDistance = .6
 
     def __init__(self, variant, xy, keys, textures, sounds, fonts):
-            self.variant = variant
+        self.variant = variant
         self.x, self.y = xy
         self.age = 0
         self.allTextures = textures
