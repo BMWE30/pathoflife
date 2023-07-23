@@ -234,7 +234,7 @@ while running:
     # Play the choir noise when the user chooses a level
     # and show the random symboly
     playMusic("titleScreenJingle.ogg")
-    showSymbol(screen, 4, randint(0, 55), textures)
+    #showSymbol(screen, 4, randint(0, 55), textures)
 
     # Play the normal game music
     playMusic("basementLoop.ogg", intro="basementIntro.ogg")

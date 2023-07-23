@@ -182,9 +182,10 @@ class Game:
                 if e.type == QUIT:
                     quit()
                 elif e.type == KEYDOWN and e.key == 27:
+                    print("skipped pausing")
                     # Pause the game
-                    running = pause(screen, self.seed, textures, fonts, [
-                        self.isaac.speed, self.isaac.shotSpeed, self.isaac.damage, self.isaac.luck, self.isaac.shotRate, self.isaac.range])
+                    # running = pause(screen, self.seed, textures, fonts, [
+                    #     self.isaac.speed, self.isaac.shotSpeed, self.isaac.damage, self.isaac.luck, self.isaac.shotRate, self.isaac.range])
 
                 elif e.type == KEYDOWN:
                     # Update key value
