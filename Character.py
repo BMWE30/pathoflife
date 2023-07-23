@@ -224,18 +224,7 @@ class Character:
 
             self.pill.use(self)  # Pass in the character to check for PHD
             st = self.pill.stats  # The pills stats
-            self.age = self.age + 1
-            self.textures = self.allTextures["character"][self.age]
-            self.heads = [self.textures.subsurface(
-                Rect((i*64)*2, 0, 64, 64)) for i in range(3)]
-            self.heads.append(transform.flip(self.heads[1], True, False))
-            self.tearHeads = [self.textures.subsurface(
-                Rect(64+(i*64)*2, 0, 64, 64)) for i in range(3)]
-            self.tearHeads.append(transform.flip(
-                self.tearHeads[1], True, False))
-            self.specialFrames = [self.textures.subsurface(
-                i*128, 272+128, 128, 128) for i in range(1, 3)]
-            self.specialFrame = 0
+            #self.age = self.age + 1
 
             types = ["Speed", "Tears", "Damage", "Range",
                      "Shot Speed", "Luck"]  # The types of pills
@@ -539,6 +528,17 @@ class Character:
                     self.game.currentRoom = (0, 0)
                     self.game.setup()
                     self.game.updateFloor()
+                    self.textures = self.allTextures["character"][self.game.floorIndex]
+                    self.heads = [self.textures.subsurface(
+						Rect((i*64)*2, 0, 64, 64)) for i in range(3)]
+                    self.heads.append(transform.flip(self.heads[1], True, False))
+                    self.tearHeads = [self.textures.subsurface(
+						Rect(64+(i*64)*2, 0, 64, 64)) for i in range(3)]
+                    self.tearHeads.append(transform.flip(
+						self.tearHeads[1], True, False))
+                    self.specialFrames = [self.textures.subsurface(
+						i*128, 272+128, 128, 128) for i in range(1, 3)]
+                    self.specialFrame = 0
                 if not ob.collideable and not rockColX and not rockColY:
                     # Object not collideable
                     rockColX = rockColY = False
