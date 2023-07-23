@@ -209,6 +209,9 @@ class Character:
 		if self.hearts[0].health == 0:
 			self.die()
 
+	# def useFood(self):
+		
+
 	def usePill(self):
 		if self.pill != None: # Ensure the character has a pill
 			

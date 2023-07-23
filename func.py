@@ -105,12 +105,17 @@ def loadFloor(name, index, size, sounds, textures):
     floor[(0, 5)] = Room(index, 0, (0, 5), d[6], textures, sounds)
     floor[(0, 6)] = Room(index, 0, (0, 6), d[7], textures, sounds)
 
-
     # add item room
-    itemRoom = (0,0)
+    itemRoom = (0, 0)
     floor[itemRoom] = Room(index, 1, itemRoom, d[1], textures, sounds)
-    #floor[itemRoom].other.append(PHD((6,3), sounds, textures["phd"]))
-    #floor[itemRoom].other.append(Pill((6,3), textures["pills"]))
+    # floor[itemRoom].other.append(PHD((6,3), sounds, textures["phd"]))
+    # floor[itemRoom].other.append(Pill((6, 3), textures["pills"]))
+    floor[itemRoom].other.append(Coin
+                                 (0, (6, 2), [sounds["coinDrop"], sounds["coinPickup"]], textures["coins"]))
+    floor[itemRoom].other.append(Coin
+                                 (0, (6, 4), [sounds["coinDrop"], sounds["coinPickup"]], textures["coins"]))
+    floor[itemRoom].other.append(Coin
+                                 (0, (2, 2), [sounds["coinDrop"], sounds["coinPickup"]], textures["coins"]))
     floor[itemRoom].other.append(choc((6,3), sounds, textures["choc"]))
 
 
@@ -120,18 +125,32 @@ def loadFloor(name, index, size, sounds, textures):
     floor[bossRoom].enemies.append(
         [Gurdy, Duke][randint(0, 1)](textures, sounds))
 
-    # add shop
+    # add shop food
     shopRoom = (0, -1)
     floor[shopRoom] = Room(index, 5, shopRoom, d[2], textures, sounds)
     things = [
         Heart(1, (4, 3), [sounds["heartIntake"],
-              sounds["holy"]], textures["pickupHearts"]),
+                          sounds["holy"]], textures["pickupHearts"]),
         Pill((6, 3), textures["pills"]),
         PHD((8, 3), sounds, textures["phd"])
     ]
     for i in range(len(things)):
         things[i].price = i*2+3
         floor[shopRoom].other.append(things[i])
+
+        # add shop toy
+    shopRoom = (0, -2)
+    floor[shopRoom] = Room(index, 5, shopRoom, d[2], textures, sounds)
+    things = [
+        Heart(1, (4, 3), [sounds["heartIntake"],
+                          sounds["holy"]], textures["pickupHearts"]),
+        Pill((6, 3), textures["pills"]),
+        PHD((12, 3), sounds, textures["phd"])
+
+    ]
+    for i in range(len(things)):
+        things[i].price = 0
+        # floor[shopRoom].other.append(things[i])
 
     # for i in range(size-1):
 
@@ -256,15 +275,18 @@ def deleteSave(index):
         pass
 
 
-def write(text, font, alph=alph, dark=.8):
+def write(text, font, alph=alph, dark=.5):
     # Create surface with special font
 
     width = font[0].get_width()
     height = font[0].get_height()
+    # writing = Surface((width*len(text), height)).convert_alpha()
     writing = Surface((width*len(text), height)).convert_alpha()
-    writing.fill((0, 0, 0, 0))
+    writing.fill((1, 1, 1, 1))
+
     for i in range(len(text)):
         writing.blit(font[alph.index(text[i].lower())], (i*width, 0))
+        # writing.blit(font[alph.index(text[i].lower())], (i*width, 0))
     return darken(writing, dark)
 
 
