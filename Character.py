@@ -29,16 +29,16 @@ from meat import *
 
 
 class Character:
-	"""The main class for Isaac"""
+    """The main class for Isaac"""
 
-	hurtDistance = .6
+    hurtDistance = .6
 
-	def __init__(self, variant, xy, keys, textures, sounds, fonts):
-    		self.variant = variant
-		self.x, self.y = xy
-		self.age = 0
-		self.allTextures = textures
-		self.textures = textures["character"][variant]
+    def __init__(self, variant, xy, keys, textures, sounds, fonts):
+            self.variant = variant
+        self.x, self.y = xy
+        self.age = 0
+        self.allTextures = textures
+        self.textures = textures["character"][variant]
 
         # Record import sounds and textures
         self.tearTextures = textures["tears"]
@@ -608,7 +608,7 @@ class Character:
 
         # Draw characters special frame
         if self.specialFrame == 0:
-            surface.blit(self.body, (self.x-32, self.y-32))
+            #surface.blit(self.body, (self.x-32, self.y-32))
             surface.blit(self.head, (self.x-32, self.y-32-20))
         else:
             surface.blit(
@@ -635,4 +635,4 @@ class Character:
             item.renderCorner(surface)
 
 
-		return move
+        return move
