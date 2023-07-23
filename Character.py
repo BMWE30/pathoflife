@@ -34,7 +34,7 @@ class Character:
     hurtDistance = .6
 
     def __init__(self, variant, xy, keys, textures, sounds, fonts):
-            self.variant = variant
+        self.variant = variant
         self.x, self.y = xy
         self.age = 0
         self.allTextures = textures
@@ -397,7 +397,7 @@ class Character:
         # Spawn a tear in the correct direction
         if self.lastTearKey in self.lastTearKeys and time-self.lastTear >= (8-self.shotRate)/18:
             self.tears.append(Tear([(0, 1), (1, 0), (0, -1), (-1, 0)][self.lastTearKey], (self.x, self.y-20), (self.xVel *
-                              1.5, self.yVel*1.5), self.shotSpeed, self.damage, self.range, True, self.tearTextures, self.tearSounds))
+                                                                                                               1.5, self.yVel*1.5), self.shotSpeed, self.damage, self.range, True, self.tearTextures, self.tearSounds))
             self.lastTear = time
         elif time-self.lastTear <= 0.1:
             try:
@@ -585,10 +585,12 @@ class Character:
             # Try to walk throught the door
             if not dcx or not dcy:
                 if sum(map(int, [
-                    mx[side] < 0 and door.rect.x-(self.x+dx) > 0,
-                    mx[side] > 0 and door.rect.x+door.rect.w-(self.x+dx) < 0,
-                    my[side] > 0 and door.rect.y-(self.y+dy) > 0,
-                    my[side] < 0 and door.rect.y+door.rect.h-(self.y+dy) < 0,
+                        mx[side] < 0 and door.rect.x-(self.x+dx) > 0,
+                        mx[side] > 0 and door.rect.x +
+                    door.rect.w-(self.x+dx) < 0,
+                        my[side] > 0 and door.rect.y-(self.y+dy) > 0,
+                        my[side] < 0 and door.rect.y +
+                    door.rect.h-(self.y+dy) < 0,
                 ])) == 1:
 
                     # find adjcent door and remove the door
@@ -608,7 +610,7 @@ class Character:
 
         # Draw characters special frame
         if self.specialFrame == 0:
-            #surface.blit(self.body, (self.x-32, self.y-32))
+            # surface.blit(self.body, (self.x-32, self.y-32))
             surface.blit(self.head, (self.x-32, self.y-32-20))
         else:
             surface.blit(
@@ -633,6 +635,5 @@ class Character:
 
         for item in self.items:
             item.renderCorner(surface)
-
 
         return move
