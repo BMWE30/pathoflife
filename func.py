@@ -17,6 +17,10 @@ from banana import *
 from choc import *
 from broccoli import *
 from meat import *
+from pikachu import *
+from po import *
+from mario import *
+
 
 alph = "abcdefghijklmnopqrstuvwxyz0123456789 "
 
@@ -92,33 +96,46 @@ def loadFloor(name, index, size, sounds, textures):
     if index == 0:
         # starting room
         # floor 0, variant 0, xy (0,0),
-        floor[(0, 0)] = Room(index, 0, (0, 0), d[0], textures, sounds, False, [])
+        floor[(0, 0)] = Room(index, 0, (0, 0),
+                             d[0], textures, sounds, False, [])
 
         # Create the floor
         moves = [(0, 1), (0, -1), (1, 0), (-1, 0)]
         unusedRooms = [i for i in range(2, len(d))]
         possibleCoords = moves[:]
-        rooms = [(0,0), (0,1), (0,2), (0,3)]
-        floor[(1,0)] = Room(index, 0, (1,0), d[1], textures, sounds, False, [])
-        floor[(2,0)] = Room(index, 0, (2,0), d[1], textures, sounds, True, ["Toy", "Food", ""])
+        rooms = [(0, 0), (0, 1), (0, 2), (0, 3)]
+        floor[(1, 0)] = Room(index, 0, (1, 0),
+                             d[1], textures, sounds, False, [])
+        floor[(2, 0)] = Room(index, 0, (2, 0), d[1],
+                             textures, sounds, True, ["Toy", "Food", ""])
+
+        floor[(1, 0)].other.append(Coin
+                                   (0, (6, 2), [sounds["coinDrop"], sounds["coinPickup"]], textures["coins"]))
+        floor[(1, 0)].other.append(Coin
+                                   (0, (6, 2), [sounds["coinDrop"], sounds["coinPickup"]], textures["coins"]))
+        floor[(1, 0)].other.append(Coin
+                                   (0, (6, 4), [sounds["coinDrop"], sounds["coinPickup"]], textures["coins"]))
+        floor[(1, 0)].other.append(Coin
+                                   (0, (2, 2), [sounds["coinDrop"], sounds["coinPickup"]], textures["coins"]))
 
         itemRoom = (2, -1)
-        floor[itemRoom] = Room(index, 1, itemRoom, d[1], textures, sounds, False, [])
+        floor[itemRoom] = Room(index, 1, itemRoom, d[1],
+                               textures, sounds, False, [])
 
-        floor[itemRoom].other.append(Coin
-                                 (0, (6, 2), [sounds["coinDrop"], sounds["coinPickup"]], textures["coins"]))
-        floor[itemRoom].other.append(Coin
-                                 (0, (6, 4), [sounds["coinDrop"], sounds["coinPickup"]], textures["coins"]))
-        floor[itemRoom].other.append(Coin
-                                    (0, (2, 2), [sounds["coinDrop"], sounds["coinPickup"]], textures["coins"]))
-        floor[itemRoom].other.append(choc((6,3), sounds, textures["choc"]))
-
+        # floor[itemRoom].other.append(choc((6, 3), sounds, textures["choc"]))
+        floor[itemRoom].other.append(
+            pikachu((6, 5), sounds, textures["pikachu"]))
+        floor[itemRoom].other.append(po((6, 3), sounds, textures["po"]))
+        floor[itemRoom].other.append(mario((3, 5), sounds, textures["mario"]))
 
         shopRoom = (2, -2)
-        floor[shopRoom] = Room(index, 1, shopRoom, d[2], textures, sounds, False, [])
+        floor[shopRoom] = Room(index, 1, shopRoom, d[2],
+                               textures, sounds, False, [])
+        # floor[itemRoom].other.append(pikachu((6, 4), sounds, textures["choc"]))
+
         things = [
             Heart(1, (4, 3), [sounds["heartIntake"],
-                          sounds["holy"]], textures["pickupHearts"]),
+                              sounds["holy"]], textures["pickupHearts"]),
             Pill((6, 3), textures["pills"]),
             PHD((12, 3), sounds, textures["phd"])
 
@@ -126,23 +143,23 @@ def loadFloor(name, index, size, sounds, textures):
         for i in range(len(things)):
             things[i].price = 0
 
-
         # add boss room
         bossRoom = (2, -3)
-        floor[bossRoom] = Room(index, 2, bossRoom, d[0], textures, sounds, False, [])
+        floor[bossRoom] = Room(index, 2, bossRoom, d[0],
+                               textures, sounds, False, [])
         floor[bossRoom].enemies.append(
             [Gurdy, Duke][randint(0, 1)](textures, sounds))
-        
 
-        floor[(2,1)] = Room(index, 0, (2,1), d[1], textures, sounds, False, [])
-        
+        floor[(2, 1)] = Room(index, 0, (2, 1),
+                             d[1], textures, sounds, False, [])
 
-        
-        floor[(2, 2)] = Room(index, 0, (2,2), d[1], textures, sounds, False, [])
+        floor[(2, 2)] = Room(index, 0, (2, 2),
+                             d[1], textures, sounds, False, [])
 
         # add boss room
         bossRoom = (2, 3)
-        floor[bossRoom] = Room(index, 2, bossRoom, d[0], textures, sounds, False, [])
+        floor[bossRoom] = Room(index, 2, bossRoom, d[0],
+                               textures, sounds, False, [])
         floor[bossRoom].enemies.append(
             [Gurdy, Duke][randint(0, 1)](textures, sounds))
 
@@ -150,51 +167,49 @@ def loadFloor(name, index, size, sounds, textures):
     elif index == 1:
         # starting room
         # floor 0, variant 0, xy (0,0),
-        floor[(0, 0)] = Room(index, 0, (0, 0), d[0], textures, sounds, False, [])
+        floor[(0, 0)] = Room(index, 0, (0, 0),
+                             d[0], textures, sounds, False, [])
 
         # Create the floor
         moves = [(0, 1), (0, -1), (1, 0), (-1, 0)]
         unusedRooms = [i for i in range(2, len(d))]
         possibleCoords = moves[:]
-        rooms = [(0,0), (0,1), (0,2), (0,3)]
-        floor[(1,0)] = Room(index, 0, (1,0), d[1], textures, sounds, False, [])
-        floor[(2,0)] = Room(index, 0, (2,0), d[1], textures, sounds, True, ["Toy", "Food", ""])
-        floor[(2, -1)] = Room(index, 0, (2,-1), d[1], textures, sounds, False, [])
+        rooms = [(0, 0), (0, 1), (0, 2), (0, 3)]
+        floor[(1, 0)] = Room(index, 0, (1, 0),
+                             d[1], textures, sounds, False, [])
+        floor[(2, 0)] = Room(index, 0, (2, 0), d[1],
+                             textures, sounds, True, ["Toy", "Food", ""])
+        floor[(2, -1)] = Room(index, 0, (2, -1),
+                              d[1], textures, sounds, False, [])
 
-
-
-
-        floor[(2, -2)] = Room(index, 0, (2,-2), d[1], textures, sounds, False, [])
+        floor[(2, -2)] = Room(index, 0, (2, -2),
+                              d[1], textures, sounds, False, [])
 
         # add boss room
         bossRoom = (2, -3)
-        floor[bossRoom] = Room(index, 2, bossRoom, d[0], textures, sounds, False, [])
+        floor[bossRoom] = Room(index, 2, bossRoom, d[0],
+                               textures, sounds, False, [])
         floor[bossRoom].enemies.append(
             [Gurdy, Duke][randint(0, 1)](textures, sounds))
-        
-        floor[(2,1)] = Room(index, 0, (2,1), d[1], textures, sounds, False, [])
-        
 
-        
-        floor[(2, 2)] = Room(index, 0, (2,2), d[1], textures, sounds, False, [])
+        floor[(2, 1)] = Room(index, 0, (2, 1),
+                             d[1], textures, sounds, False, [])
+
+        floor[(2, 2)] = Room(index, 0, (2, 2),
+                             d[1], textures, sounds, False, [])
 
         # add boss room
         bossRoom = (2, 3)
-        floor[bossRoom] = Room(index, 2, bossRoom, d[0], textures, sounds, False, [])
+        floor[bossRoom] = Room(index, 2, bossRoom, d[0],
+                               textures, sounds, False, [])
         floor[bossRoom].enemies.append(
             [Gurdy, Duke][randint(0, 1)](textures, sounds))
-
-
-
 
     # add item room
     # itemRoom = (0,0)
     # floor[itemRoom] = Room(index, 1, itemRoom, d[1], textures, sounds, False, [])
     # #floor[itemRoom].other.append(PHD((6,3), sounds, textures["phd"]))
     # floor[itemRoom].other.append(Pill((6,3), textures["pills"]))
-
-
-
 
     # add shop
     # shopRoom = (0, -1)
