@@ -224,18 +224,7 @@ class Character:
 
             self.pill.use(self)  # Pass in the character to check for PHD
             st = self.pill.stats  # The pills stats
-            self.age = self.age + 1
-            self.textures = self.allTextures["character"][self.age]
-            self.heads = [self.textures.subsurface(
-                Rect((i*64)*2, 0, 64, 64)) for i in range(3)]
-            self.heads.append(transform.flip(self.heads[1], True, False))
-            self.tearHeads = [self.textures.subsurface(
-                Rect(64+(i*64)*2, 0, 64, 64)) for i in range(3)]
-            self.tearHeads.append(transform.flip(
-                self.tearHeads[1], True, False))
-            self.specialFrames = [self.textures.subsurface(
-                i*128, 272+128, 128, 128) for i in range(1, 3)]
-            self.specialFrame = 0
+            #self.age = self.age + 1
 
             types = ["Speed", "Tears", "Damage", "Range",
                      "Shot Speed", "Luck"]  # The types of pills
@@ -397,7 +386,7 @@ class Character:
         # Spawn a tear in the correct direction
         if self.lastTearKey in self.lastTearKeys and time-self.lastTear >= (8-self.shotRate)/18:
             self.tears.append(Tear([(0, 1), (1, 0), (0, -1), (-1, 0)][self.lastTearKey], (self.x, self.y-20), (self.xVel *
-                              1.5, self.yVel*1.5), self.shotSpeed, self.damage, self.range, True, self.tearTextures, self.tearSounds))
+                                                                                                               1.5, self.yVel*1.5), self.shotSpeed, self.damage, self.range, True, self.tearTextures, self.tearSounds))
             self.lastTear = time
         elif time-self.lastTear <= 0.1:
             try:
@@ -539,6 +528,17 @@ class Character:
                     self.game.currentRoom = (0, 0)
                     self.game.setup()
                     self.game.updateFloor()
+                    self.textures = self.allTextures["character"][self.game.floorIndex]
+                    self.heads = [self.textures.subsurface(
+						Rect((i*64)*2, 0, 64, 64)) for i in range(3)]
+                    self.heads.append(transform.flip(self.heads[1], True, False))
+                    self.tearHeads = [self.textures.subsurface(
+						Rect(64+(i*64)*2, 0, 64, 64)) for i in range(3)]
+                    self.tearHeads.append(transform.flip(
+						self.tearHeads[1], True, False))
+                    self.specialFrames = [self.textures.subsurface(
+						i*128, 272+128, 128, 128) for i in range(1, 3)]
+                    self.specialFrame = 0
                 if not ob.collideable and not rockColX and not rockColY:
                     # Object not collideable
                     rockColX = rockColY = False
@@ -585,10 +585,12 @@ class Character:
             # Try to walk throught the door
             if not dcx or not dcy:
                 if sum(map(int, [
-                    mx[side] < 0 and door.rect.x-(self.x+dx) > 0,
-                    mx[side] > 0 and door.rect.x+door.rect.w-(self.x+dx) < 0,
-                    my[side] > 0 and door.rect.y-(self.y+dy) > 0,
-                    my[side] < 0 and door.rect.y+door.rect.h-(self.y+dy) < 0,
+                        mx[side] < 0 and door.rect.x-(self.x+dx) > 0,
+                        mx[side] > 0 and door.rect.x +
+                    door.rect.w-(self.x+dx) < 0,
+                        my[side] > 0 and door.rect.y-(self.y+dy) > 0,
+                        my[side] < 0 and door.rect.y +
+                    door.rect.h-(self.y+dy) < 0,
                 ])) == 1:
 
                     # find adjcent door and remove the door
@@ -608,7 +610,7 @@ class Character:
 
         # Draw characters special frame
         if self.specialFrame == 0:
-            #surface.blit(self.body, (self.x-32, self.y-32))
+            # surface.blit(self.body, (self.x-32, self.y-32))
             surface.blit(self.head, (self.x-32, self.y-32-20))
         else:
             surface.blit(
@@ -633,6 +635,5 @@ class Character:
 
         for item in self.items:
             item.renderCorner(surface)
-
 
         return move
