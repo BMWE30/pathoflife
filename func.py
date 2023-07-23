@@ -208,8 +208,8 @@ def loadFloor(name, index, size, sounds, textures):
         floor[bossRoom].enemies.append(
             [Gurdy][0](textures, sounds))
 
-        # floor[(2, 1)] = Room(index, 0, (2, 1),
-        #                      d[1], textures, sounds, False, [])
+        floor[(2, 1)] = Room(index, 0, (2, 1),
+                             d[1], textures, sounds, False, [])
 
         floor[(2, 2)] = Room(index, 0, (2, 2),
                              d[1], textures, sounds, False, [])
