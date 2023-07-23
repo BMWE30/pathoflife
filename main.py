@@ -141,6 +141,9 @@ textures = {
     "po": loadTexture("po.png"),
     "mario": loadTexture("mario.png"),
     "meat": loadTexture("meat.png"),
+    "guy": loadTexture("guy.png"),
+    "girl": loadTexture("girl.png"),
+    "ghost": loadTexture("ghost.png"),
     "streak": loadTexture("streak.png"),
     "map": {
         "background": loadTexture("minimap.png").subsurface(0, 0, 112, 102),

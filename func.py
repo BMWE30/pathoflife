@@ -20,7 +20,9 @@ from meat import *
 from pikachu import *
 from po import *
 from mario import *
-
+from guy import *
+from girl import *
+from ghost import *
 
 alph = "abcdefghijklmnopqrstuvwxyz0123456789 "
 

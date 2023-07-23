@@ -26,7 +26,9 @@ from banana import *
 from choc import *
 from broccoli import *
 from meat import *
-
+from guy import *
+from girl import *
+from ghost import *
 
 class Character:
     """The main class for Isaac"""
@@ -523,6 +525,27 @@ class Character:
                         self.items.append(ob)
                         ob.pickup()
                         self.damage += 6
+                elif type(ob) == guy:
+                    if self.pickups[0].use(ob.price):
+                        self.items.append(ob)
+                        ob.pickup()
+                        self.damage += 1
+                        self.shotSpeed += 1
+                        self.luck += 1
+                elif type(ob) == girl:
+                    if self.pickups[0].use(ob.price):
+                        self.items.append(ob)
+                        ob.pickup()
+                        self.speed += 1
+                        self.shotRate += 1
+                        self.range += 1
+                elif type(ob) == ghost:
+                    if self.pickups[0].use(ob.price):
+                        self.items.append(ob)
+                        ob.pickup()
+                        self.damage += 1
+                        self.range += 1
+                        self.luck += 1
                 elif type(ob) == Trapdoor:
                     self.game.floorIndex += 1
                     self.game.currentRoom = (0, 0)
