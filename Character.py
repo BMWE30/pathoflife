@@ -22,6 +22,10 @@ from Item import *
 from Pill import *
 from Trapdoor import *
 from Banner import *
+from banana import *
+from choc import *
+from broccoli import *
+from meat import *
 
 
 class Character:
@@ -370,7 +374,7 @@ class Character:
 			self.step(time)
 
 		# Allow for Arm lift and Hurt animation
-		if self.specialFrame == 2 and time-self.lastHurt >= 0.22:
+		if self.specialFrame == 2 and time-self.lastHurt >= 1.5: #changed from 0.22
 			self.specialFrame = 0
 		elif self.specialFrame == 1 and time-self.lastPickup >= 0.5:
 			self.specialFrame = 0
@@ -458,6 +462,35 @@ class Character:
 					if self.pickups[0].use(ob.price):
 						self.items.append(ob)
 						ob.pickup()
+				elif type(ob) == banana:
+					if self.pickups[0].use(ob.price):
+						self.items.append(ob)
+						ob.pickup()
+						self.range += 3
+						self.shotSpeed += 3
+				elif type(ob) == choc:
+					if self.pickups[0].use(ob.price):
+						self.items.append(ob)
+						ob.pickup()
+						self.speed += 2
+						self.shotRate += 2
+						self.range -= 2
+						self.luck -= 2
+				elif type(ob) == broccoli:
+					if self.pickups[0].use(ob.price):
+						self.items.append(ob)
+						ob.pickup()
+						self.speed += 1
+						self.shotRate += 1
+						self.damage += 1
+						self.range += 1
+						self.shotSpeed += 1
+						self.luck += 1
+				elif type(ob) == meat:
+					if self.pickups[0].use(ob.price):
+						self.items.append(ob)
+						ob.pickup()
+						self.damage += 6
 				elif type(ob) == Trapdoor:
 					self.game.floorIndex += 1
 					self.game.currentRoom = (0,0)
