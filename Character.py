@@ -29,16 +29,16 @@ from meat import *
 
 
 class Character:
-    """The main class for Isaac"""
+	"""The main class for Isaac"""
 
-    hurtDistance = .6
+	hurtDistance = .6
 
-    def __init__(self, variant, xy, keys, textures, sounds, fonts):
-        self.variant = variant
-        self.x, self.y = xy
-        self.age = 0
-        self.allTextures = textures
-        self.textures = textures["character"][variant]
+	def __init__(self, variant, xy, keys, textures, sounds, fonts):
+    		self.variant = variant
+		self.x, self.y = xy
+		self.age = 0
+		self.allTextures = textures
+		self.textures = textures["character"][variant]
 
         # Record import sounds and textures
         self.tearTextures = textures["tears"]
@@ -634,4 +634,5 @@ class Character:
         for item in self.items:
             item.renderCorner(surface)
 
-        return move
+
+		return move
