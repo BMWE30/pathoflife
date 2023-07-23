@@ -102,8 +102,8 @@ textures = {
     "pickups": loadTexture("pickups.png"),
     "character": [darken(loadTexture(["isaac_baby.png", "isaac_high_school.png", "isaac_adult.png"][i]), .1) for i in range(3)],
     "floors": [loadTexture("basement.png"),
-               loadTexture("caves.png"),
-               loadTexture("catacombs.png"),
+               loadTexture("basement.png"),
+               loadTexture("basement.png"),
                loadTexture("depths.png"),
                loadTexture("necropolis.png"),
                loadTexture("womb.png"),
@@ -127,7 +127,7 @@ textures = {
     "pickupHearts": loadTexture("pickup_hearts.png"),
     "overlays": [loadTexture("%i.png" % i, dir="overlays") for i in range(5)],
     "shading": loadTexture("shading.png"),
-    "loading": [loadTexture("%i.png" % (i+1), dir="loading") for i in range(56)],
+    "loading": [loadTexture("loading/path-of-life.png") ],
     "pauseCard": loadTexture("pauseCard.png", dir="pause"),
     "seedCard": loadTexture("seedcard.png", dir="pause"),
     "arrow": loadTexture("arrow.png", dir="pause", double=False),
@@ -238,7 +238,7 @@ while running:
     # Play the choir noise when the user chooses a level
     # and show the random symboly
     playMusic("titleScreenJingle.ogg")
-    #showSymbol(screen, 4, randint(0, 55), textures)
+    showSymbol(screen, 4, 0, textures)
 
     # Play the normal game music
     playMusic("basementLoop.ogg", intro="basementIntro.ogg")
