@@ -47,7 +47,7 @@ class Room:
 	lcx = -1
 	lcy = -1
 
-	def __init__(self, floor, variant, xy, xml, textures, sounds):
+	def __init__(self, floor, variant, xy, xml, textures, sounds, isDecisionRoom, decision):
 		offX = offY = 0
 		if variant == 2:
 			offX, offY = 234*2, 156*2
@@ -102,6 +102,10 @@ class Room:
 		self.fires = []
 		self.doors = []
 		self.other = [] # Other stuff that doesnt have special properties
+
+		self.isDecisionRoom = isDecisionRoom
+		self.decisions = decision
+		
 
 		self.parseRoomXML(xml) # Build the room based on the xml
 
@@ -159,7 +163,7 @@ class Room:
 		
 		
 		side = [[6,7], [13, 3], [6,-1], [-1,3]].index([x,y])
-		self.doors.append(Door(self.floor, side, variant, isOpen, self.textures["doors"], self.sounds))
+		self.doors.append(Door(self.floor, side, variant, isOpen, self.textures["doors"], self.sounds, self.decisions.pop() if self.isDecisionRoom else "" ))
 
 	def addOther(self, xy):
 		self.other.append(Explosion(0, xy, self.sounds["explosion"], self.textures["explosions"]))

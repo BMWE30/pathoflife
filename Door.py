@@ -24,9 +24,10 @@ class Door:
 
 	# ROOMS ARE 13 x 7
 
-	def __init__(self, floor, side, variant, isOpen, texture, sounds):
+	def __init__(self, floor, side, variant, isOpen, texture, sounds, text):
 		self.side = side
 		self.variant = variant
+		self.text = text
 
 		# Locked door
 		if variant == 5:
@@ -47,7 +48,7 @@ class Door:
 			self.locked = True
 		
 		# Darken the door a little
-		self.texture = func.darken(self.texture, .25)
+		#self.texture = func.darken(self.texture, .25)
 		self.sounds = sounds
 
 		self.isOpen = isOpen
@@ -115,8 +116,21 @@ class Door:
 		xy = (((142 + (self.x*GRATIO)-(width//2)-GRATIO//2) + self.xOff) + ox, ((89 + (self.y*GRATIO)-(height//2)+GRATIO//2)+self.yOff) + oy)
 
 		f = font.Font('freesansbold.ttf', 32)
-		text_surface = f.render('Some Text!!!', False, (0, 0, 0))
-		surface.blit(text_surface, xy)
+		text_surface = f.render(self.text, False, (0, 0, 0))
+		x, y = xy
+		text_xy = ()
+		if self.side == 0:
+			text_xy = (x +20, y -20)
+		elif self.side == 1:
+			text_xy = (x +20, y)
+		elif self.side == 2:
+			text_xy = (x +20, y +80)
+		elif self.side == 3:
+			text_xy = (x +20, y)
+
+
+		surface.blit(text_surface, text_xy)
+
 		surface.blit(self.doorBack, xy)
 
 		if not self.isOpen:

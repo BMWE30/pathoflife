@@ -514,6 +514,8 @@ class Character:
 						my[side] > 0 and door.rect.y-(self.y+dy) > 0,
 						my[side] < 0 and door.rect.y+door.rect.h-(self.y+dy) < 0,
 					])) == 1:
+
+					# find adjcent door and remove the door
 					move[0] = mx[side]
 					move[1] = my[side]
 					break

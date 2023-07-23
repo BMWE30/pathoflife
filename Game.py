@@ -37,6 +37,23 @@ class Game:
 		# Feed the seed to the random module
 		random.seed(self.seed)
 
+	def isAdjecent(self, x1, y1, x2, y2):
+		pos = 0
+		dx = x1 - x2
+		dy = y1 - y2
+		if dy < 0:
+			pos = [6, 7]
+		elif dy > 0:
+			pos = [6, -1]
+		
+		if dx < 0:
+			pos = [13, 3]
+		elif dx > 0:
+			pos = [-1, 3]
+		
+		return tuple([(abs(dx) + abs(dy)) == 1 , pos])
+
+
 	def setup(self):
 		# Load floor with custom data
 		floor = loadFloor(["childhood.xml", "basement.xml", "basement.xml", "basement.xml", "basement.xml", "basement.xml", "basement.xml"][self.floorIndex], self.floorIndex, randint(8, 12), self.sounds, self.textures)
@@ -46,28 +63,39 @@ class Game:
 		# Position isaac in the center of the room
 		self.isaac.x, self.isaac.y = (WIDTH//2, (HEIGHT//4)*3)
 
+
+		for coord1 in floor:
+			for coord2 in floor:
+				adj = self.isAdjecent(coord1[0], coord1[1], coord2[0], coord2[1])
+				if adj[0]:
+					room = floor[(coord1[0], coord1[1])]
+					print("room " + str((coord1[0], coord1[1])) + " added door " + str(adj[1]))
+					room.addDoor(adj[1], room.variant, True)
+					
+
 		# Add a door to every room
-		for coord in floor:
-			for i in range(len(adjecent)):
-				diffX = adjecent[i][0]
-				diffY = adjecent[i][1]
+		# for coord in floor:
+		# 	for i in range(len(adjecent)):
+		# 		diffX = adjecent[i][0]
+		# 		diffY = adjecent[i][1]
 
-				coordX = coord[0]
-				coordY = coord[1]
+		# 		coordX = coord[0]
+		# 		coordY = coord[1]
 
-				try:
-					room = floor[(diffX + coordX, diffY + coordY)]
-					if room.variant != 0:
-						room.addDoor(doorPoss[i], room.variant, True)
-					else:
-						room.addDoor(doorPoss[i], floor[coord].variant, True)
+		# 		try:
+		# 			room = floor[(diffX + coordX, diffY + coordY)]
+		# 			print("adding door for room " + str((diffX + coordX, diffY + coordY)) + " in door pos: " + str(doorPoss[i]))
+		# 			if room.variant != 0:
+		# 				room.addDoor(doorPoss[i], room.variant, True)
+		# 			else:
+		# 				room.addDoor(doorPoss[i], floor[coord].variant, True)
 
-				except:
-					pass
+		# 		except:
+		# 			pass
 
 		# Create a banner for the new floor
 		self.floor = floor
-		self.banners.append(Banner(["Birth", "Caves", "Catacombs","Necropolis","Depths","Womb","Uterus"][self.floorIndex], self.textures))
+		self.banners.append(Banner(["Birth", "Schoollife", "Adulthood","Necropolis","Depths","Womb","Uterus"][self.floorIndex], self.textures))
 
 	def updateMinimap(self, currentRoom):
 		# Draw the minimap
@@ -95,6 +123,9 @@ class Game:
 				pass
 
 		self.updateMinimap(self.currentRoom)
+
+	
+
 
 
 	def run(self, screen, sounds, textures, fonts, joystick=None):
@@ -240,7 +271,7 @@ class Game:
 
 
 			# DRAW MAP
-			screen.blit(self.minimap, (MAPX-mWidth//2, MAPY-mHeight//2))
+			#screen.blit(self.minimap, (MAPX-mWidth//2, MAPY-mHeight//2))
 
 			# Blit all banners
 			for banner in self.banners:
