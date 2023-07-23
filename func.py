@@ -112,21 +112,23 @@ def loadFloor(name, index, size, sounds, textures):
         floor[(1, 0)].other.append(Coin
                                    (0, (6, 2), [sounds["coinDrop"], sounds["coinPickup"]], textures["coins"]))
         floor[(1, 0)].other.append(Coin
-                                   (0, (6, 2), [sounds["coinDrop"], sounds["coinPickup"]], textures["coins"]))
-        floor[(1, 0)].other.append(Coin
                                    (0, (6, 4), [sounds["coinDrop"], sounds["coinPickup"]], textures["coins"]))
         floor[(1, 0)].other.append(Coin
                                    (0, (2, 2), [sounds["coinDrop"], sounds["coinPickup"]], textures["coins"]))
 
-        itemRoom = (2, -1)
-        floor[itemRoom] = Room(index, 1, itemRoom, d[1],
-                               textures, sounds, False, [])
+        # toy room
+        toyRoom = (2, -1)
+        floor[toyRoom] = Room(index, 1, toyRoom, d[2],
+                              textures, sounds, False, [])
 
-        # floor[itemRoom].other.append(choc((6, 3), sounds, textures["choc"]))
-        floor[itemRoom].other.append(
-            pikachu((6, 5), sounds, textures["pikachu"]))
-        floor[itemRoom].other.append(po((6, 3), sounds, textures["po"]))
-        floor[itemRoom].other.append(mario((3, 5), sounds, textures["mario"]))
+        toys = [
+            pikachu((4, 3), sounds, textures["pikachu"]),
+            po((6, 3), sounds, textures["po"]),
+            mario((8, 3), sounds, textures["mario"])
+        ]
+        for i in range(len(toys)):
+            toys[i].price = 3
+            floor[toyRoom].other.append(toys[i])
 
         shopRoom = (2, -2)
         floor[shopRoom] = Room(index, 1, shopRoom, d[2],
@@ -150,8 +152,21 @@ def loadFloor(name, index, size, sounds, textures):
         floor[bossRoom].enemies.append(
             [Gurdy, Duke][randint(0, 1)](textures, sounds))
 
-        floor[(2, 1)] = Room(index, 0, (2, 1),
-                             d[1], textures, sounds, False, [])
+        # food room
+        foodRoom = (2, 1)
+
+        floor[foodRoom] = Room(index, 1, toyRoom, d[2],
+                               textures, sounds, False, [])
+
+        food = [
+            broccoli((3, 3), sounds, textures["broccoli"]),
+            meat((5, 3), sounds, textures["meat"]),
+            banana((7, 3), sounds, textures["banana"]),
+            choc((9, 3), sounds, textures["choc"])
+        ]
+        for i in range(len(food)):
+            food[i].price = 2
+            floor[foodRoom].other.append(food[i])
 
         floor[(2, 2)] = Room(index, 0, (2, 2),
                              d[1], textures, sounds, False, [])
@@ -192,8 +207,8 @@ def loadFloor(name, index, size, sounds, textures):
         floor[bossRoom].enemies.append(
             [Gurdy, Duke][randint(0, 1)](textures, sounds))
 
-        floor[(2, 1)] = Room(index, 0, (2, 1),
-                             d[1], textures, sounds, False, [])
+        # floor[(2, 1)] = Room(index, 0, (2, 1),
+        #                      d[1], textures, sounds, False, [])
 
         floor[(2, 2)] = Room(index, 0, (2, 2),
                              d[1], textures, sounds, False, [])
