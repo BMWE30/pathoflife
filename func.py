@@ -13,6 +13,10 @@ from Heart import *
 from PHD import *
 from Pill import *
 from Duke import *
+from banana import *
+from choc import *
+from broccoli import *
+from meat import *
 
 alph = "abcdefghijklmnopqrstuvwxyz0123456789 "
 
@@ -97,6 +101,14 @@ def loadFloor(name, index, size, sounds, textures):
         floor[(1,0)] = Room(index, 0, (1,0), d[1], textures, sounds, False, [])
         floor[(2,0)] = Room(index, 0, (2,0), d[1], textures, sounds, True, ["Toy", "Food", ""])
         floor[(2, -1)] = Room(index, 0, (2,-1), d[1], textures, sounds, False, [])
+
+            floor[itemRoom].other.append(Coin
+                                 (0, (6, 2), [sounds["coinDrop"], sounds["coinPickup"]], textures["coins"]))
+    floor[itemRoom].other.append(Coin
+                                 (0, (6, 4), [sounds["coinDrop"], sounds["coinPickup"]], textures["coins"]))
+    floor[itemRoom].other.append(Coin
+                                 (0, (2, 2), [sounds["coinDrop"], sounds["coinPickup"]], textures["coins"]))
+    floor[itemRoom].other.append(choc((6,3), sounds, textures["choc"]))
 
 
 
@@ -184,6 +196,20 @@ def loadFloor(name, index, size, sounds, textures):
     # for i in range(len(things)):
     #     things[i].price = i*2+3
     #     floor[shopRoom].other.append(things[i])
+
+        # add shop toy
+    shopRoom = (0, -2)
+    floor[shopRoom] = Room(index, 5, shopRoom, d[2], textures, sounds)
+    things = [
+        Heart(1, (4, 3), [sounds["heartIntake"],
+                          sounds["holy"]], textures["pickupHearts"]),
+        Pill((6, 3), textures["pills"]),
+        PHD((12, 3), sounds, textures["phd"])
+
+    ]
+    for i in range(len(things)):
+        things[i].price = 0
+        # floor[shopRoom].other.append(things[i])
 
     # for i in range(size-1):
 
@@ -308,15 +334,18 @@ def deleteSave(index):
         pass
 
 
-def write(text, font, alph=alph, dark=.8):
+def write(text, font, alph=alph, dark=.5):
     # Create surface with special font
 
     width = font[0].get_width()
     height = font[0].get_height()
+    # writing = Surface((width*len(text), height)).convert_alpha()
     writing = Surface((width*len(text), height)).convert_alpha()
-    writing.fill((0, 0, 0, 0))
+    writing.fill((1, 1, 1, 1))
+
     for i in range(len(text)):
         writing.blit(font[alph.index(text[i].lower())], (i*width, 0))
+        # writing.blit(font[alph.index(text[i].lower())], (i*width, 0))
     return darken(writing, dark)
 
 

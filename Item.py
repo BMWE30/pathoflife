@@ -27,7 +27,7 @@ class Item:
 		self.textures = textures
 
 		self.bounds = Rect(GRIDX+GRATIO*self.x,GRIDY+GRATIO*self.y, 32, 64)
-
+		
 		self.texture = self.textures.subsurface(0, 0, self.tWidth, self.tHeight)
 
 		# Texture for shop price
