@@ -20,6 +20,7 @@ from meat import *
 from pikachu import *
 from po import *
 from mario import *
+from IRD import *
 
 
 alph = "abcdefghijklmnopqrstuvwxyz0123456789 "
@@ -148,7 +149,7 @@ def loadFloor(name, index, size, sounds, textures):
         floor[bossRoom] = Room(index, 2, bossRoom, d[0],
                                textures, sounds, False, [])
         floor[bossRoom].enemies.append(
-            [Gurdy, Duke][randint(0, 1)](textures, sounds))
+            [Duke][0](textures, sounds))
 
         floor[(2, 1)] = Room(index, 0, (2, 1),
                              d[1], textures, sounds, False, [])
@@ -161,7 +162,7 @@ def loadFloor(name, index, size, sounds, textures):
         floor[bossRoom] = Room(index, 2, bossRoom, d[0],
                                textures, sounds, False, [])
         floor[bossRoom].enemies.append(
-            [Gurdy, Duke][randint(0, 1)](textures, sounds))
+            [Duke][0](textures, sounds))
 
     # floor 1 school life
     elif index == 1:
@@ -190,7 +191,7 @@ def loadFloor(name, index, size, sounds, textures):
         floor[bossRoom] = Room(index, 2, bossRoom, d[0],
                                textures, sounds, False, [])
         floor[bossRoom].enemies.append(
-            [Gurdy, Duke][randint(0, 1)](textures, sounds))
+            [Gurdy][0](textures, sounds))
 
         floor[(2, 1)] = Room(index, 0, (2, 1),
                              d[1], textures, sounds, False, [])
@@ -203,7 +204,7 @@ def loadFloor(name, index, size, sounds, textures):
         floor[bossRoom] = Room(index, 2, bossRoom, d[0],
                                textures, sounds, False, [])
         floor[bossRoom].enemies.append(
-            [Gurdy, Duke][randint(0, 1)](textures, sounds))
+            [Gurdy][0](textures, sounds))
         
     # floor 2 adult
     elif index == 2:
@@ -229,10 +230,10 @@ def loadFloor(name, index, size, sounds, textures):
 
         # add boss room
         bossRoom = (2, -3)
-        floor[bossRoom] = Room(index, 2, bossRoom, d[0],
+        floor[bossRoom] = Room(index, 5, bossRoom, d[0],
                                textures, sounds, False, [])
         floor[bossRoom].enemies.append(
-            [Gurdy, Duke][randint(0, 1)](textures, sounds))
+            [IRD][0](textures, sounds))
 
         floor[(2, 1)] = Room(index, 0, (2, 1),
                              d[1], textures, sounds, False, [])
@@ -242,10 +243,10 @@ def loadFloor(name, index, size, sounds, textures):
 
         # add boss room
         bossRoom = (2, 3)
-        floor[bossRoom] = Room(index, 2, bossRoom, d[0],
+        floor[bossRoom] = Room(index, 5, bossRoom, d[0],
                                textures, sounds, False, [])
         floor[bossRoom].enemies.append(
-            [Gurdy, Duke][randint(0, 1)](textures, sounds))
+            [IRD][0](textures, sounds))
 
     # add item room
     # itemRoom = (0,0)

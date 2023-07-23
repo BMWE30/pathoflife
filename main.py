@@ -161,6 +161,7 @@ textures = {
     "bosses": {
         "gurdy": loadTexture("gurdy.png", dir="bosses"),
         "duke": loadTexture("duke.png", dir="bosses"),
+        "ird": loadTexture("ird.png", dir="bosses"),
     }
 }
 
