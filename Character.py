@@ -550,7 +550,7 @@ class Character:
 						my[side] > 0 and door.rect.y-(self.y+dy) > 0,
 						my[side] < 0 and door.rect.y+door.rect.h-(self.y+dy) < 0,
 					])) == 1:
-					
+
 					move[0] = mx[side]
 					move[1] = my[side]
 					break
@@ -567,7 +567,7 @@ class Character:
 		
 		# Draw characters special frame
 		if self.specialFrame == 0:
-			surface.blit(self.body, (self.x-32, self.y-32))
+			#surface.blit(self.body, (self.x-32, self.y-32))
 			surface.blit(self.head, (self.x-32, self.y-32-20))
 		else:
 			surface.blit(self.specialFrames[self.specialFrame-1], (self.x-64, self.y-72))
