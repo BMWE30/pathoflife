@@ -92,7 +92,7 @@ def showSymbol(screen, length, index, textures):
 
 
 # Setup display
-display.set_caption("Lift of growth")
+display.set_caption("Path of Life")
 display.set_icon(image.load(os.path.join('res', 'textures', 'icon.png')))
 
 # Load all needed textures
